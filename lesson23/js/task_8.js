@@ -6,8 +6,7 @@ const lengthOfCircle = +prompt(
 const perimeterOfSquare = +prompt(
   "Enter the perimeter of the square in centimeters:"
 );
-const PI = 3.1415926535897932384626433832795;
-const radius = lengthOfCircle / (2 * PI);
+const radius = lengthOfCircle / (2 * Math.PI);
 const sideOfSquare = perimeterOfSquare / 4;
 if (2 * radius <= sideOfSquare) {
   alert(

@@ -1,12 +1,13 @@
 // Запросить у пользователя пятиразрядное число и определить, является ли оно палиндромом.
 const number5 = +prompt("Enter fivedigit number:");
-firstDigit = Math.floor(number5 / 10000);
-secondDigit = Math.floor(number5 / 1000) - 10 * firstDigit;
-thirdDigit = Math.floor(number5 / 100) - (100 * firstDigit + 10 * secondDigit);
-fourthDigit =
+let firstDigit = Math.floor(number5 / 10000);
+let secondDigit = Math.floor(number5 / 1000) - 10 * firstDigit;
+let thirdDigit =
+  Math.floor(number5 / 100) - (100 * firstDigit + 10 * secondDigit);
+let fourthDigit =
   Math.floor(number5 / 10) -
   (1000 * firstDigit + 100 * secondDigit + 10 * thirdDigit);
-fifthDigit =
+let fifthDigit =
   number5 -
   (10000 * firstDigit +
     1000 * secondDigit +

@@ -1,4 +1,4 @@
-let capacityOfFleshInGigabite = +prompt(
+const capacityOfFleshInGigabite = +prompt(
   "Enter the capacity of your flesh drive in gigabites: "
 );
 const capacityInMegabite = capacityOfFleshInGigabite * 1024;

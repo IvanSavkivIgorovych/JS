@@ -8,24 +8,14 @@ const moneyConvert = prompt(
 const dollarToEuro = 1.2080212611741966658613191592172;
 const dollarToHryvnias = 27.6273;
 const dollarToManat = 1.6923;
-switch (moneyConvert) {
+switch (moneyConvert.toLowerCase()) {
   case "EUR":
-    alert(
-      `$${moneyInDollars} in EUR wiil be ${moneyInDollars * dollarToEuro} euro`
-    );
-    break;
   case "eur":
     alert(
       `$${moneyInDollars} in EUR wiil be ${moneyInDollars * dollarToEuro} euro`
     );
     break;
   case "UAH":
-    alert(
-      `$${moneyInDollars} in UAH wiil be ${
-        moneyInDollars * dollarToHryvnias
-      } hryvnias`
-    );
-    break;
   case "uah":
     alert(
       `$${moneyInDollars} in UAH wiil be ${
@@ -34,12 +24,6 @@ switch (moneyConvert) {
     );
     break;
   case "AZN":
-    alert(
-      `$${moneyInDollars} in AZN wiil be ${
-        moneyInDollars * dollarToManat
-      } manat`
-    );
-    break;
   case "azn":
     alert(
       `$${moneyInDollars} in AZN wiil be ${
