@@ -8,9 +8,5 @@ function isPerfectNumber(x) {
       sumOfDivisors += i;
     }
   }
-  if (sumOfDivisors === x) {
-    console.log(`${x} is a perfect number!`);
-  } else {
-    console.log(`${x} is not a perfect number!`);
-  }
+  return sumOfDivisors === x;
 }

@@ -3,7 +3,7 @@ const firstNumber = +prompt("Enter the first number:");
 const secondNumber = +prompt("Enter the second number:");
 const minOfNumbers = Math.min(Math.abs(firstNumber), Math.abs(secondNumber));
 let commonDivisor = 1;
-for (let j = 1; j <= minOfNumbers; j++) {
+for (let j = minOfNumbers; j >= 1; j--) {
   if (Math.abs(firstNumber) % j === 0 && Math.abs(secondNumber) % j === 0) {
     commonDivisor = j;
   }

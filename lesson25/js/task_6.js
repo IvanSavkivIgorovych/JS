@@ -10,11 +10,7 @@ function isPerfectNumber(x) {
       sumOfDivisors += i;
     }
   }
-  if (sumOfDivisors === x) {
-    return true;
-  } else {
-    return false;
-  }
+  return sumOfDivisors === x;
 }
 function perfectNumbers(min, max) {
   for (let i = Math.min(min, max); i <= Math.max(min, max); i++) {

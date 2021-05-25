@@ -12,21 +12,15 @@ function secondsToTime(x) {
   const hour = Math.floor(x / 3600);
   const minute = Math.floor((x % 3600) / 60);
   const second = x - hour * 3600 - minute * 60;
-  console.log(
-    hour.toString().padStart(2, "0") +
-      ":" +
-      minute.toString().padStart(2, "0") +
-      ":" +
-      second.toString().padStart(2, "0")
-  );
+  return formatTime(hour, minute, second);
 }
 function subtractOfTime(
   hour1,
-  minute1 = "00",
-  second1 = "00",
+  minute1 = 0,
+  second1 = 0,
   hour2,
-  minute2 = "00",
-  second2 = "00"
+  minute2 = 0,
+  second2 = 0
 ) {
   console.log(
     secondsToTime(

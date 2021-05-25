@@ -3,9 +3,10 @@
 // еще один пример. И так до тех пор, пока пользователь не откажется.
 let continueOrNot = false;
 do {
-  num_1 = +prompt("Enter the first number:");
-  num_2 = +prompt("Enter the second number:");
-  operator = prompt("Enter the operator (+, -, *, /, or ^):");
+  const num_1 = +prompt("Enter the first number:");
+  const num_2 = +prompt("Enter the second number:");
+  const operator = prompt("Enter the operator (+, -, *, /, or ^):");
+  let result = null;
   switch (operator) {
     case "+":
       result = num_1 + num_2;

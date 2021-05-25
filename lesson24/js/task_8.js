@@ -5,20 +5,22 @@ let message = "";
 let dayOfWeek = 0;
 do {
   if (dayOfWeek % 7 === 0) {
-    message = "Monday. ";
+    message = "Monday";
   } else if (dayOfWeek % 7 === 1) {
-    message = "Tuesday. ";
+    message = "Tuesday";
   } else if (dayOfWeek % 7 === 2) {
-    message = "Wednesday. ";
+    message = "Wednesday";
   } else if (dayOfWeek % 7 === 3) {
-    message = "Thursday. ";
+    message = "Thursday";
   } else if (dayOfWeek % 7 === 4) {
-    message = "Friday. ";
+    message = "Friday";
   } else if (dayOfWeek % 7 === 5) {
-    message = "Saturday. ";
+    message = "Saturday";
   } else if (dayOfWeek % 7 === 6) {
-    message = "Sunday. ";
+    message = "Sunday";
   }
   dayOfWeek++;
-  yesOrNo = confirm(`${message}Do you want to see the next day of the week???`);
+  yesOrNo = confirm(
+    `${message}. Do you want to see the next day of the week???`
+  );
 } while (yesOrNo === true);
