@@ -47,9 +47,38 @@ const fraction = {
     denominator_2 = 1
   ) {
     const lcm = lcm_two_numbers(denominator_1, denominator_2);
-    const sum = `Difference is ${
+    const difference = `Difference is ${
       (numerator_1 * lcm) / denominator_1 - (numerator_2 * lcm) / denominator_2
     }/${lcm}`;
-    return sum;
+    return difference;
+  },
+  multiple: function productOfFractions(
+    numerator_1 = 1,
+    denominator_1 = 1,
+    numerator_2 = 1,
+    denominator_2 = 1
+  ) {
+    const product = `Product is ${numerator_1 * numerator_2}/${
+      denominator_1 * denominator_2
+    }`;
+    return product;
+  },
+  division: function divisionOfFractions(
+    numerator_1 = 1,
+    denominator_1 = 1,
+    numerator_2 = 1,
+    denominator_2 = 1
+  ) {
+    const part = `The part is ${numerator_1 * denominator_2}/${
+      denominator_1 * numerator_2
+    }`;
+    return part;
+  },
+  reduction: function reductionOfFraction(numerator = 1, denominator = 1) {
+    const gcd = gcd_two_numbers(numerator, denominator);
+    const reduction = `The reduction fraction is ${numerator / gcd}/${
+      denominator / gcd
+    }`;
+    return reduction;
   },
 };
