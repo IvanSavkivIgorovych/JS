@@ -9,51 +9,52 @@
 // Покупка продукта. Функция принимает название продукта и отмечает его как купленный.
 let listOfPurchases = [
   {
-    product: "Bread",
+    name: "Bread",
     ammount: 2,
     purchased: false,
   },
   {
-    product: "Milk",
+    name: "Milk",
     ammount: 1,
     purchased: true,
   },
   {
-    product: "Butter",
+    name: "Butter",
     ammount: 1,
     purchased: true,
   },
   {
-    product: "Potato",
+    name: "Potato",
     ammount: 5,
     purchased: false,
   },
   {
-    product: "Apple",
+    name: "Apple",
     ammount: 3,
     purchased: true,
   },
 ];
 
-function listToScreen() {
-  const orderedList = listOfPurchases.sort((a, b) => {
-    return a.purchased - b.purchased;
-  });
-  console.log(orderedList);
+function sortProducts(products) {
+  products.sort((a, b) => a.purchased - b.purchased);
 }
 
-function addPurshaseToList(list, add) {
-  let product = list.find((something) => something.product === add);
-  if (product) {
-    product.ammount += 1;
+function showProducts(products) {
+  console.log(products);
+}
+
+function addPurshaseToList(list, productToAdd) {
+  const existingProduct = list.find((product) => product.name === productToAdd);
+  if (existingProduct) {
+    existingProduct.amount++;
   } else {
-    list.push({ product: add, ammount: 1, purchased: false });
+    list.push({ name: productToAdd, amount: 1, purchased: false });
   }
   return list;
 }
 
-function BuyProduct(list, product) {
-  let productBuy = list.find((something) => something.product === product);
+function buyProduct(list, product) {
+  let productBuy = list.find((something) => something.name === product);
   if (productBuy) {
     productBuy.purchased = true;
   }

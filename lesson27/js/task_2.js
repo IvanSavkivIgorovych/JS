@@ -43,12 +43,8 @@ function checkToScreen(check) {
 }
 console.log(checkToScreen(check));
 
-function calculateSumOfCheck(list) {
-  let sum = 0;
-  for (let i of list) {
-    sum += i.ammount * i.price;
-  }
-  return sum;
+function getExpensiest(list) {
+  return Math.max(...list.map((item) => item.price * item.ammount));
 }
 
 console.log(calculateSumOfCheck(check));
