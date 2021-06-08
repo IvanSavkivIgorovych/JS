@@ -34,9 +34,12 @@ function getFacultyAuditoria(auditoria, faculty) {
 
 let group = { name: "M-22", students: 13, faculty: "math" };
 
-function checkForGroup(arr, obj) {
-  return arr.filter((item) => {
-    return item.capacity >= obj.students && item.faculty === obj.faculty;
+function checkForGroup(auditoria, group) {
+  return auditoria.filter((auditorium) => {
+    return (
+      auditorium.capacity >= group.students &&
+      auditorium.faculty === group.faculty
+    );
   });
 }
 
