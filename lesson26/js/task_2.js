@@ -10,12 +10,12 @@
 // Функция деления 2-х объектов-дробей;
 
 // Функция сокращения объекта-дроби.
-function lcm_two_numbers(x, y) {
+function lcmTwoNumbers(x, y) {
   if (typeof x !== "number" || typeof y !== "number") return false;
-  return !x || !y ? 0 : Math.abs((x * y) / gcd_two_numbers(x, y));
+  return !x || !y ? 0 : Math.abs((x * y) / gcdTwoNumbers(x, y));
 }
 
-function gcd_two_numbers(x, y) {
+function gcdTwoNumbers(x, y) {
   x = Math.abs(x);
   y = Math.abs(y);
   while (y) {
@@ -25,60 +25,44 @@ function gcd_two_numbers(x, y) {
   }
   return x;
 }
-const fraction = {
-  numerator: null,
-  denominator: null,
-  sum: function sumOfFractions(
-    numerator_1 = 1,
-    denominator_1 = 1,
-    numerator_2 = 1,
-    denominator_2 = 1
-  ) {
-    const lcm = lcm_two_numbers(denominator_1, denominator_2);
-    const sum = `Sum is ${
-      (numerator_1 * lcm) / denominator_1 + (numerator_2 * lcm) / denominator_2
-    }/${lcm}`;
-    return sum;
-  },
-  subtraction: function differenceOfFractions(
-    numerator_1 = 1,
-    denominator_1 = 1,
-    numerator_2 = 1,
-    denominator_2 = 1
-  ) {
-    const lcm = lcm_two_numbers(denominator_1, denominator_2);
-    const difference = `Difference is ${
-      (numerator_1 * lcm) / denominator_1 - (numerator_2 * lcm) / denominator_2
-    }/${lcm}`;
-    return difference;
-  },
-  multiple: function productOfFractions(
-    numerator_1 = 1,
-    denominator_1 = 1,
-    numerator_2 = 1,
-    denominator_2 = 1
-  ) {
-    const product = `Product is ${numerator_1 * numerator_2}/${
-      denominator_1 * denominator_2
-    }`;
-    return product;
-  },
-  division: function divisionOfFractions(
-    numerator_1 = 1,
-    denominator_1 = 1,
-    numerator_2 = 1,
-    denominator_2 = 1
-  ) {
-    const part = `The part is ${numerator_1 * denominator_2}/${
-      denominator_1 * numerator_2
-    }`;
-    return part;
-  },
-  reduction: function reductionOfFraction(numerator = 1, denominator = 1) {
-    const gcd = gcd_two_numbers(numerator, denominator);
-    const reduction = `The reduction fraction is ${numerator / gcd}/${
-      denominator / gcd
-    }`;
-    return reduction;
-  },
+const a = {
+  numerator: 2,
+  denominator: 3,
 };
+const b = {
+  numerator: 5,
+  denominator: 6,
+};
+function sumOfFractions(a, b) {
+  const lcm = lcmTwoNumbers(a.denominator, b.denominator);
+  const sum = `Sum is ${
+    (a.numerator * lcm) / a.denominator + (b.numerator * lcm) / b.denominator
+  }/${lcm}`;
+  return sum;
+}
+function differenceOfFractions(a, b) {
+  const lcm = lcmTwoNumbers(a.denominator, b.denominator);
+  const difference = `Difference is ${
+    (a.numerator * lcm) / a.denominator - (b.numerator * lcm) / b.denominator
+  }/${lcm}`;
+  return difference;
+}
+function productOfFractions(a, b) {
+  const product = `Product is ${a.numerator * b.numerator}/${
+    a.denominator * b.denominator
+  }`;
+  return product;
+}
+function divisionOfFractions(a, b) {
+  const part = `The part is ${a.numerator * b.denominator}/${
+    a.denominator * b.numerator
+  }`;
+  return part;
+}
+function reductionOfFraction(numerator = 1, denominator = 1) {
+  const gcd = gcdTwoNumbers(numerator, denominator);
+  const reduction = `The reduction fraction is ${numerator / gcd}/${
+    denominator / gcd
+  }`;
+  return reduction;
+}

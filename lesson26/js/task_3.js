@@ -16,21 +16,19 @@ function formatTimeUnit(value) {
   return value.toString().padStart(2, "0");
 }
 const time = {
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-  screen: function timeToScreen(h, m, s) {
-    return (
-      formatTimeUnit(h) + ":" + formatTimeUnit(m) + ":" + formatTimeUnit(s)
-    );
+  hours: 13,
+  minutes: 23,
+  seconds: 59,
+  timeToScreen(...units) {
+    return units.map(formatTimeUnit).join(":");
   },
-  changeSeconds: function changeSeconds(h, m, s, change) {
+  changeSeconds: function changeSeconds(change) {
     const hour = Math.floor(change / 3600);
     const minute = Math.floor((change % 3600) / 60);
     const second = change - hour * 3600 - minute * 60;
-    let newH = hour + h;
-    let newM = minute + m;
-    let newS = second + s;
+    let newH = hour + this.hours;
+    let newM = minute + this.minutes;
+    let newS = second + this.seconds;
     if (newS >= 60) {
       newM += Math.floor(newS / 60);
       newS -= 60;
@@ -49,10 +47,10 @@ const time = {
       formatTimeUnit(newS)
     );
   },
-  changeMinutes: function changeMinutes(h, m, s, change) {
+  changeMinutes: function changeMinutes(change) {
     const hour = Math.floor(change / 60);
-    let newH = hour + h;
-    let newM = m + (change % 60);
+    let newH = hour + this.hours;
+    let newM = this.minutes + (change % 60);
     if (newM >= 60) {
       newH += Math.floor(newM / 60);
       newM -= 60;
@@ -65,16 +63,20 @@ const time = {
       ":" +
       formatTimeUnit(newM) +
       ":" +
-      formatTimeUnit(s)
+      formatTimeUnit(this.seconds)
     );
   },
-  changeHours: function changeHours(h, m, s, change) {
-    let newH = change + h;
+  changeHours: function changeHours(change) {
+    let newH = change + this.hours;
     if (newH >= 23) {
       newH = newH % 24;
     }
     return (
-      formatTimeUnit(newH) + ":" + formatTimeUnit(m) + ":" + formatTimeUnit(s)
+      formatTimeUnit(newH) +
+      ":" +
+      formatTimeUnit(this.minutes) +
+      ":" +
+      formatTimeUnit(this.seconds)
     );
   },
 };
