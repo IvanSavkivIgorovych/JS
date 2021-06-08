@@ -12,10 +12,10 @@ const car = {
   model: 21074,
   year: 2008,
   speed: 100,
-  informationToScreen: function toScreen() {
+  toScreen() {
     return `The manufacturer is ${this.manufacturer}, model - ${this.model}, year of manufacture is ${this.year} and average speed is ${this.speed} km/h`;
   },
-  time: function timeSpend(length) {
+  timeSpend(length) {
     const message =
       "The time needed to overcome transmitted distance at medium speed is:";
     const time = Math.floor(length / car.speed);
