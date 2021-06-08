@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HM#29</title>
+    <link rel="stylesheet" href="css/task_2.css" />
+    <link rel="stylesheet" href="css/task_3.css" />
+  </head>
+  <body>
+    <button id="show-modal" class="btn">Open</button>
+
+    <div id="content" class="content">
+      <div class="traffic__lights">
+        <div id="red" class="traffic__light traffic__red"></div>
+        <div id="yellow" class="traffic__light"></div>
+        <div id="green" class="traffic__light"></div>
+        <button id="btn" class="traffic__btn">Click It</button>
+      </div>
+    </div>
+
+    <script src="js/task_1.js"></script>
+    <script src="js/task_2.js"></script>
+    <script>
+      (function () {
+        let modal = $modal({
+          title: "Header of the modal window",
+          content: "<p>Bla, bla, bla...</p>",
+          footerButtons: [
+            {
+              class: "btn btn__cancel",
+              text: "Cancel",
+              handler: "modalHandlerCancel",
+            },
+            { class: "btn btn__ok", text: "OK", handler: "modalHandlerOk" },
+          ],
+        });
+        document
+          .querySelector("#show-modal")
+          .addEventListener("click", function () {
+            modal.show();
+          });
+      })();
+    </script>
+    <script src="js/task_3.js"></script>
+  </body>
+</html>
