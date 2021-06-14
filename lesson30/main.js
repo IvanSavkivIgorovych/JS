@@ -6,42 +6,60 @@
 // текстом. Не забудьте выключить поведение по
 // умолчанию для этих сочетаний клавиш.
 
-document.body.addEventListener("keydown", (event) => {
+// виніс в окрему функцію, щоб перевикористати
+function addResizer(elem) {
   const resizer = document.createElement("div");
-  if ((event.code === "KeyE" || event.code === "Comma") && event.ctrlKey) {
-    event.returnValue = false;
-    let elem = document.querySelector(".content__textarea");
-    if (event.code === "KeyE" && elem.nodeName === "DIV") {
-      let newEl = document.createElement("textarea");
-      newEl.setAttribute("cols", 40);
-      newEl.setAttribute("rows", 30);
-      newEl.className = "content__textarea";
-      newEl.textContent = elem.textContent;
-      elem.replaceWith(newEl);
-    } else if (event.code === "Comma" && elem.nodeName === "TEXTAREA") {
-      let newEl = document.createElement("div");
-      newEl.className = "content__textarea";
-      newEl.textContent = elem.value;
-      resizer.className = "content__textarea--resizer";
+  resizer.className = "content__textarea--resizer";
+  elem.append(resizer);
 
-      const initResize = (e) => {
-        e.preventDefault;
-        window.addEventListener("mousemove", startResize);
-        window.addEventListener("mouseup", stopResize);
-      };
+  const initResize = (e) => {
+    e.preventDefault(); // метод
+    window.addEventListener("mousemove", startResize);
+    window.addEventListener("mouseup", stopResize);
+  };
 
-      const startResize = (e) => {
-        newEl.style.width = e.clientX - newEl.offsetLeft + "px";
-      };
-      const stopResize = (e) => {
-        window.removeEventListener("mousemove", startResize);
-        window.removeEventListener("mouseup", stopResize);
-      };
+  const startResize = (e) => {
+    elem.style.width = e.clientX - elem.offsetLeft + "px";
+    elem.style.height = e.clientY - elem.offsetTop + "px"; // щоб ресайзити по вертикалі
+  };
 
-      resizer.addEventListener("mousedown", initResize);
-      newEl.append(resizer);
-      elem.replaceWith(newEl);
-    }
+  const stopResize = () => {
+    window.removeEventListener("mousemove", startResize);
+    window.removeEventListener("mouseup", stopResize);
+  };
+
+  resizer.addEventListener("mousedown", initResize);
+}
+
+document.body.addEventListener("keydown", (event) => {
+  let elem = document.querySelector(".content__textarea");
+
+  // повиносив умови для читабельності
+  const isCtrlE = event.code === "KeyE" && (event.ctrlKey || event.metaKey); // metaKey на макбуках замІсть ctrl
+  const isCtrlComma =
+    event.code === "Comma" && (event.ctrlKey || event.metaKey);
+
+  if (isCtrlE || isCtrlComma) {
+    event.preventDefault(); // event.retrnValue = false --- застаріло, зараз використовують preventDefault
+  }
+
+  if (isCtrlE && elem.nodeName === "DIV") {
+    const textarea = document.createElement("textarea");
+    textarea.setAttribute("cols", 40);
+    textarea.setAttribute("rows", 30);
+    textarea.className = "content__textarea";
+    textarea.value = elem.textContent; // для textarea змінюємо value
+    elem.replaceWith(textarea);
+  }
+
+  if (isCtrlComma && elem.nodeName === "TEXTAREA") {
+    const textBlock = document.createElement("div");
+    textBlock.className = "content__textarea";
+    textBlock.textContent = elem.value;
+
+    addResizer(textBlock);
+
+    elem.replaceWith(textBlock);
   }
 });
 
@@ -72,7 +90,8 @@ class Employee {
     this.salary = salary;
   }
 }
-const arrEmp = [
+
+const employees = [
   new Employee("Tolik", "Big Boss", "Sales", 10000),
   new Employee("Sanya", "Manager", "Sales", 5000),
   new Employee("Julia", "Manager", "Sales", 5000),
@@ -111,30 +130,37 @@ const arrEmp = [
     4000
   ),
 ];
+
 class EmpTable {
-  constructor(arr) {
-    this.arr = arr;
+  constructor(employees) {
+    this.employees = employees;
   }
-  getHtml() {
+  // перейменував, бо getHtml судячи з назви повинна повертати html
+  render() {
     const table = document.getElementById("content__table");
+
     const tbody = document.createElement("tbody");
     tbody.setAttribute("id", "content__tbody");
     table.append(tbody);
-    const array = this.arr;
+
     const head = document.createElement("tr");
     head.setAttribute("style", "font-size: 18px;");
+
     const th1 = document.createElement("th");
     th1.textContent = "Name";
     th1.setAttribute("id", "content__th1");
     th1.style.cursor = "pointer";
+
     const th2 = document.createElement("th");
     th2.textContent = "Position";
     th2.setAttribute("id", "content__th2");
     th2.style.cursor = "pointer";
+
     const th3 = document.createElement("th");
     th3.textContent = "Department";
     th3.setAttribute("id", "content__th3");
     th3.style.cursor = "pointer";
+
     const th4 = document.createElement("th");
     th4.textContent = "Salary ($)";
     th4.setAttribute("id", "content__th4");
@@ -144,25 +170,30 @@ class EmpTable {
     head.append(th2);
     head.append(th3);
     head.append(th4);
+
     tbody.append(head);
-    for (let i in array) {
-      let tr = document.createElement("tr");
+
+    for (const employee of this.employees) {
+      // для масивів - for .. of
+      const tr = document.createElement("tr");
       tbody.append(tr);
-      for (let j in array[i]) {
+      for (const key in employee) {
         let td = document.createElement("td");
-        td.textContent = array[i][j];
-        tr.append(td);
+        td.textContent = employee[key];
         td.setAttribute("style", "padding: 5px 10px; font-size: 18px;");
+        tr.append(td);
       }
     }
+
     table.setAttribute("border", "2");
     table.setAttribute("bordercolor", "brown");
     table.setAttribute("width", "60%");
     table.setAttribute("style", "margin: auto; background-color: lightgrey;");
   }
 }
-const tableObj = new EmpTable(arrEmp);
-tableObj.getHtml();
+
+const employeeTable = new EmpTable(employees);
+employeeTable.render();
 
 const getCellValue = (tr, i) =>
   tr.children[i].innerText || tr.children[i].textContent;
@@ -176,39 +207,25 @@ const comparer = (i, asc) => (a, b) =>
     getCellValue(asc ? b : a, i)
   );
 
-document.querySelectorAll("th").forEach((th) =>
+document.querySelectorAll("th").forEach((th) => {
+  // тут краще порозділяти для читабельності
+  let asc = true;
   th.addEventListener("click", () => {
     const table = th.closest("table");
-    Array.from(table.querySelectorAll("tr:nth-child(n+2)"))
-      .sort(
-        comparer(
-          Array.from(th.parentNode.children).indexOf(th),
-          (this.asc = !this.asc)
-        )
-      )
-      .forEach((tr) => table.appendChild(tr));
-  })
-);
+    const colIndex = Array.from(th.parentNode.children).indexOf(th);
+    const rows = Array.from(table.querySelectorAll("tr:nth-child(n+2)"));
+
+    rows.sort(comparer(colIndex, asc));
+    rows.forEach((tr) => table.appendChild(tr));
+    asc = !asc;
+    // this.asc - працює, але this в даному контексті буде посилатися на об'єкт window
+    // тому краще явно задати змінну
+  });
+});
 
 // Создать HTML-страницу с блоком текста в рамочке.
 // Реализовать возможность изменять размер блока,
 // если зажать мышку в правом нижнем углу и тянуть ее дальше.
 
 const resDiv = document.getElementById("content__textarea");
-const resizer = document.querySelector("div.content__textarea--resizer");
-
-const initResize = (e) => {
-  e.preventDefault;
-  window.addEventListener("mousemove", startResize);
-  window.addEventListener("mouseup", stopResize);
-};
-
-const startResize = (e) => {
-  resDiv.style.width = e.clientX - resDiv.offsetLeft + "px";
-};
-const stopResize = (e) => {
-  window.removeEventListener("mousemove", startResize);
-  window.removeEventListener("mouseup", stopResize);
-};
-
-resizer.addEventListener("mousedown", initResize);
+addResizer(resDiv); // тут і знадобилася функція, щоб не писати одне й те ж

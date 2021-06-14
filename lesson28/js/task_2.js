@@ -12,7 +12,8 @@
 
 class Marker {
   constructor(color) {
-    (this.color = color), (this.amount = 100);
+    this.color = color;
+    this.amount = 100;
   }
   printToScreen(string) {
     let html = "";
@@ -20,7 +21,7 @@ class Marker {
       if (this.amount === 0) {
         break;
       }
-      if (char !== " " && this.amount !== 0) {
+      if (char !== " ") {
         this.amount -= 0.5;
       }
       html += char;
