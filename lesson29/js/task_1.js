@@ -20,8 +20,8 @@ function printListOnHtml(arr) {
     let listItemInfo = ` ${item.author}, song "${item.song}" `;
     listText.textContent = listItemInfo;
     list.appendChild(listText);
-    bodyElement.appendChild(list);
   }
+  bodyElement.appendChild(list);
 }
 
 printListOnHtml(playList);

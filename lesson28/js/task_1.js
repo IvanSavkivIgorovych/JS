@@ -9,36 +9,34 @@
 // Продемонстрировать работу свойств и методов.
 
 class Circle {
-  constructor(_r) {
-    this.r = _r;
+  constructor(radius) {
+    this._radius = radius;
   }
-  get showRadius() {
-    return this.r;
+  get radius() {
+    return this._radius;
   }
-  set changeRadius(newR) {
-    this.r = newR;
+  set radius(value) {
+    this._radius = value;
   }
-  get showDiameter() {
-    return 2 * this.r;
+  get diameter() {
+    return 2 * this.radius;
   }
-  squareOfCircle() {
-    return Math.PI * this.r ** 2;
+  area() {
+    return Math.PI * this.radius ** 2;
   }
-  lenghtOfCircle() {
-    return 2 * Math.PI * this.r;
+  circumference() {
+    return 2 * Math.PI * this.radius;
   }
 }
 
 let circle = new Circle(10);
-console.log("Radius: " + circle.showRadius + " cm.");
-circle.changeRadius = 25;
-console.log("New radius: " + circle.showRadius + " cm.");
-console.log("Diameter: " + circle.showDiameter + " cm.");
+console.log("Radius: " + circle.radius + " cm.");
+circle.radius = 25;
+console.log("New radius: " + circle.radius + " cm.");
+console.log("Diameter: " + circle.diameter + " cm.");
 console.log(
-  "Square of the circle is: " +
-    circle.squareOfCircle().toFixed(2) +
-    " square cm."
+  "Square of the circle is: " + circle.area().toFixed(2) + " square cm."
 );
 console.log(
-  "Length of the circle is: " + circle.lenghtOfCircle().toFixed(2) + " cm."
+  "Length of the circle is: " + circle.circumference().toFixed(2) + " cm."
 );
